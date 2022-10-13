@@ -24,18 +24,20 @@ If any any of these assumptions aren't true, the following steps won't work.
 
 6) Set your `Consumer Key` and `Username` using the Travis CLI. Note that this username is the username that you use to access your Dev Hub.
 
-    travis env set CONSUMERKEY <your_consumer_key>
-    travis env set USERNAME <your_username>
+    ```travis env set CONSUMERKEY <your_consumer_key>```
+    ```travis env set USERNAME <your_username>```
+    
+    or
+    
+    You can also set environment variables manually in Travis CI under repo settings.
 
 7) Add your `server.key` that you generated previously to the folder called `assets`.
 
-8) Open the `.travis.yml` file and remove the first line that starts with `openssl ...` and save the file.
+8) From the root folder of your local project, encrypt your `server.key` value:
 
-9) From the root folder of your local project, encrypt your `server.key` value:
+    ```travis encrypt-file assets/server.key assets/server.key.enc --add```
 
-    travis encrypt-file assets/server.key assets/server.key.enc --add
-
-10) IMPORTANT! Remove your `server.key`: `rm assets/server.key`, you should never store keys or certificates in a public place.
+9) IMPORTANT! Remove your `server.key`: `rm assets/server.key`, you should never store keys or certificates in a public place.
 
 And you should be ready to go! Now when you commit and push a change, your change will kick off a Travis CI build.
 
